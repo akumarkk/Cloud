@@ -101,13 +101,13 @@ resource "aws_s3_bucket_policy" "webssg_bucket_policy" {
         "Sid": "AllowCloudFrontServicePrincipalReadWrite",
         "Effect": "Allow",
         "Principal": {
-            CanonicalUser = aws_cloudfront_origin_access_identity.origin_access_identity
+            CanonicalUser = aws_cloudfront_origin_access_identity.origin_access_identity.s3_canonical_user_id
         },
         "Action": [
             "s3:GetObject",
             "s3:PutObject"
         ],
-        "Resource": "{aws_s3_bucket.web_bucket.arn}/*",
+        "Resource": "${aws_s3_bucket.web_bucket.arn}/*",
     }
 }
     )
